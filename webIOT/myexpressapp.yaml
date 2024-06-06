@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: myexpressapp
-        image: /madaralmog/kneetrainer-api-server-dev:1.0
+        image: madaralmog/kneetrainer-api-server-dev:1.0
         ports:
         - containerPort: 5000
 ---

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: myreactapp
-        image: kneetrainer-app-client-dev:development
+        image: madaralmog/kneetrainer-app-client-dev:1.0
         ports:
         - containerPort: 3000
 
