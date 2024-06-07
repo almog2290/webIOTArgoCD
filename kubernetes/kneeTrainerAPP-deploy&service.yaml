@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kneeTrainerAPP-deployment
+  namespace: webIOTtrainer
+  labels:
+    app: kneeTrainerAPP
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kneeTrainerAPP
+  template:
+    metadata:
+      labels:
+        app: kneeTrainerAPP
+    spec:
+      initContainers:
+      - name: git-clone
+        image: alpine/git
+        command:
+        - /bin/sh
+        - -c
+        - |
+          git init &&
+          git remote add -f origin https://github.com/almog2290/webIOTArgoCD.git &&
+          git config core.sparseCheckout true &&
+          echo 'dockers/webIOTReactFront/*' >> .git/info/sparse-checkout &&
+          git pull origin main
+        volumeMounts:
+        - name: webIOTReactFront
+          mountPath: /usr/src/app
+      containers:
+      - name: myreactapp
+        image: madaralmog/kneetrainer-app-client-dev:1.0
+        imagePullPolicy: ifNotPresent
+        ports:
+        - containerPort: 3000
+        // where to mount the data in the container
+        volumeMounts:
+        - name: webIOTReactFront
+          mountPath: /usr/src/app
+        - name: node_modules
+          mountPath: /usr/src/app/node_modules
+        - name: database
+          mountPath: /usr/src/app/database
+      restartPolicy: Always
+      // request for the persistent volume
+      volumes:
+      - name: webIOTReactFront
+        persistentVolumeClaim:
+          claimName: webIOTReactFront
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kneeTrainerAPP-service
+  namespace: webIOTtrainer
+spec:
+  selector:
+    app: kneeTrainerAPP
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
