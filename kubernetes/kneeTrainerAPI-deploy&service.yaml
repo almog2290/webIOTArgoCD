@@ -50,14 +50,12 @@ spec:
         imagePullPolicy: ifNotPresent
         ports:
         - containerPort: 5000
-        where to mount the data in the container
         volumeMounts:
         - name: webIOTServerExpressJS
           mountPath: /usr/src/api
         - name: database
           mountPath: /usr/src/api/database
       restartPolicy: Always
-      request for the persistent volume
       volumes:
       - name: webIOTServerExpressJS
         persistentVolumeClaim:
