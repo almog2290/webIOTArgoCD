@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kneeTrainer-api-deployment
+  name: kneetrainer-api-deployment
   namespace: web-iot-trainer
   labels:
-    app: kneeTrainer-api
+    app: kneetrainer-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kneeTrainer-api
+      app: kneetrainer-api
   template:
     metadata:
       labels:
-        app: kneeTrainer-api
+        app: kneetrainer-api
     spec:
       initContainers:
       - name: git-clone
@@ -67,11 +67,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: kneeTrainer-api-service
+  name: kneetrainer-api-service
   namespace: web-iot-trainer
 spec:
   selector:
-    app: kneeTrainerAPI
+    app: kneetrainer-api
   ports:
     - protocol: TCP
       port: 5000
