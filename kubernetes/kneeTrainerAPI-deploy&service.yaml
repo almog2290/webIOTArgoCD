@@ -28,7 +28,7 @@ spec:
           echo 'dockers/webIOTServerExpressJS/*' >> .git/info/sparse-checkout &&
           git pull origin main
         volumeMounts:
-        - name: webIOTServerExpressJS
+        - name: webiot-server-expressjs
           mountPath: /usr/src/api
       - name: git-clone2
         image: alpine/git
@@ -51,15 +51,15 @@ spec:
         ports:
         - containerPort: 5000
         volumeMounts:
-        - name: webIOTServerExpressJS
+        - name: webiot-server-expressjs
           mountPath: /usr/src/api
         - name: database
           mountPath: /usr/src/api/database
       restartPolicy: Always
       volumes:
-      - name: webIOTServerExpressJS
+      - name: webiot-server-expressjs
         persistentVolumeClaim:
-          claimName: webIOTServerExpressJS
+          claimName: webiot-server-expressjs
       - name: database
         persistentVolumeClaim:
           claimName: database

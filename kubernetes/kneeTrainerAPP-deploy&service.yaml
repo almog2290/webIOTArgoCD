@@ -4,7 +4,7 @@ metadata:
   name: kneetrainer-app-deployment
   namespace: web-iot-trainer
   labels:
-    app: kneetrainerAPP
+    app: kneetrainer-app
 spec:
   replicas: 1
   selector:
@@ -28,7 +28,7 @@ spec:
           echo 'dockers/webIOTReactFront/*' >> .git/info/sparse-checkout &&
           git pull origin main
         volumeMounts:
-        - name: webIOTReactFront
+        - name: web-iot-react-front
           mountPath: /usr/src/app
       containers:
       - name: myreactapp
@@ -37,17 +37,13 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-        - name: webIOTReactFront
+        - name: web-iot-react-front
           mountPath: /usr/src/app
-        - name: node_modules
-          mountPath: /usr/src/app/node_modules
-        - name: database
-          mountPath: /usr/src/app/database
       restartPolicy: Always
       volumes:
-      - name: webIOTReactFront
+      - name: web-iot-react-front
         persistentVolumeClaim:
-          claimName: webIOTReactFront
+          claimName: web-iot-react-front
 ---
 apiVersion: v1
 kind: Service
