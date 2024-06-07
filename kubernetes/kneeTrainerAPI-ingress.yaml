@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kneeTrainerAPP-ingress
-  namespace: webIOTtrainer
+  namespace: web-iot-trainer
 spec:
   tls:
   - hosts:
@@ -24,7 +24,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kneeTrainerAPP-certificate
-  namespace: webIOTtrainer
+  namespace: web-iot-trainer
 spec:
   secretName: kneeTrainerAPP-tls
   issuerRef:

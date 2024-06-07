@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kneeTrainerAPI-deployment
-  namespace: webIOTtrainer
+  namespace: web-iot-trainer
   labels:
     app: kneeTrainerAPI
 spec:
@@ -68,7 +68,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kneeTrainerAPI-service
-  namespace: webIOTtrainer
+  namespace: web-iot-trainer
 spec:
   selector:
     app: kneeTrainerAPI
