@@ -47,7 +47,6 @@ spec:
       containers:
       - name: myexpressapp
         image: madaralmog/kneetrainer-api-server-dev::1.0
-        imagePullPolicy: ifNotPresent
         ports:
         - containerPort: 5000
         volumeMounts:

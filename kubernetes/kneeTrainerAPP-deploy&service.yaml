@@ -33,7 +33,6 @@ spec:
       containers:
       - name: myreactapp
         image: madaralmog/kneetrainer-app-client-dev:1.0
-        imagePullPolicy: ifNotPresent
         ports:
         - containerPort: 3000
         volumeMounts:
