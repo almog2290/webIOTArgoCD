@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kneeTrainerAPP-ingress
+  name: kneeTrainer-app-ingress
   namespace: web-iot-trainer
 spec:
   tls:
   - hosts:
     - kneetrainer.madarfamily.local
-    secretName: kneeTrainerAPP-tls
+    secretName: kneeTrainer-app-tls
   rules:
   - host: kneetrainer.madarfamily.local
     http:
@@ -16,17 +16,17 @@ spec:
         path: "/"
         backend:
           service:
-            name: kneeTrainerAPP-service
+            name: kneeTrainer-app-service
             port:
               number: 3000
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: kneeTrainerAPP-certificate
+  name: kneeTrainer-app-certificate
   namespace: web-iot-trainer
 spec:
-  secretName: kneeTrainerAPP-tls
+  secretName: kneeTrainer-app-tls
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
