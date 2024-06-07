@@ -15,35 +15,6 @@ spec:
       labels:
         app: kneetrainer-api
     spec:
-      initContainers:
-      - name: git-clone
-        image: alpine/git
-        command:
-        - /bin/sh
-        - -c
-        - |
-          git init &&
-          git remote add -f origin https://github.com/almog2290/webIOTArgoCD.git &&
-          git config core.sparseCheckout true &&
-          echo 'dockers/webIOTServerExpressJS/*' >> .git/info/sparse-checkout &&
-          git pull origin main
-        volumeMounts:
-        - name: webiot-server-expressjs
-          mountPath: /usr/src/api
-      - name: git-clone2
-        image: alpine/git
-        command:
-        - /bin/sh
-        - -c
-        - |
-          git init &&
-          git remote add -f origin https://github.com/almog2290/webIOTArgoCD.git &&
-          git config core.sparseCheckout true &&
-          echo 'dockers/database/*' >> .git/info/sparse-checkout &&
-          git pull origin main
-        volumeMounts:
-        - name: database
-          mountPath: /usr/src/api/database
       containers:
       - name: myexpressapp
         image: madaralmog/kneetrainer-api-server-dev:1.0

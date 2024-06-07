@@ -15,21 +15,6 @@ spec:
       labels:
         app: kneetrainer-app
     spec:
-      initContainers:
-      - name: git-clone
-        image: alpine/git
-        command:
-        - /bin/sh
-        - -c
-        - |
-          git init &&
-          git remote add -f origin https://github.com/almog2290/webIOTArgoCD.git &&
-          git config core.sparseCheckout true &&
-          echo 'dockers/webIOTReactFront/*' >> .git/info/sparse-checkout &&
-          git pull origin main
-        volumeMounts:
-        - name: web-iot-react-front
-          mountPath: /usr/src/app
       containers:
       - name: myreactapp
         image: madaralmog/kneetrainer-app-client-dev:1.0
